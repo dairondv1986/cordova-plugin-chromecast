@@ -514,7 +514,7 @@ NSDictionary* queueOrderIDsByItemId = nil;
     if (mediaStatus == nil) {
         return @{};
     }
-    
+
     NSMutableArray *qItems = [[NSMutableArray alloc] init];
     GCKMediaQueueItem* item;
     int orderID;
@@ -524,7 +524,7 @@ NSDictionary* queueOrderIDsByItemId = nil;
         NSDictionary *qItem = [MLPCastUtilities createQueueItem: item orderID:orderID];
         [qItems addObject:qItem];
     }
-    
+
     NSMutableDictionary* mediaOut = [[NSMutableDictionary alloc] init];
     mediaOut[@"activeTrackIds"] = mediaStatus.activeTrackIDs? mediaStatus.activeTrackIDs : @[];
     mediaOut[@"currentItemId"] = @(mediaStatus.currentItemID);
@@ -679,19 +679,22 @@ NSDictionary* queueOrderIDsByItemId = nil;
         return tracks;
     }
     
-//    for (GCKMediaTrack* mediaTrack in mediaTracks) {
-//        NSDictionary* track = @{
-//            @"trackId": @(mediaTrack.identifier),
-//            @"customData": mediaTrack.customData == nil? @{} : mediaTrack.customData,
-//            @"language": mediaTrack.languageCode == nil? @"" : mediaTrack.languageCode,
-//            @"name": mediaTrack.name == nil? @"" : mediaTrack.name,
-//            @"subtype": [MLPCastUtilities getTextTrackSubtype:mediaTrack.textSubtype],
-//            @"trackContentId": mediaTrack.contentIdentifier == nil ? @"" : mediaTrack.contentIdentifier,
-//            @"trackContentType": mediaTrack.contentType == nil ? @"" : mediaTrack.contentType,
-//            @"type": [MLPCastUtilities getTrackType:mediaTrack.type],
-//        };
-//        [tracks addObject:track];
-//    }
+    for (GCKMediaTrack* mediaTrack in mediaTracks) {
+        NSDictionary* track = @{
+            @"trackId": @(mediaTrack.identifier),
+            @"customData": mediaTrack.customData == nil? @{} : mediaTrack.customData,
+            @"language": mediaTrack.languageCode == nil? @"" : mediaTrack.languageCode,
+            @"name": mediaTrack.name == nil? @"" : mediaTrack.name,
+            @"subtype": [MLPCastUtilities getTextTrackSubtype:mediaTrack.textSubtype] != nil ? [MLPCastUtilities getTextTrackSubtype:mediaTrack.textSubtype] : @"",
+            @"trackContentId": mediaTrack.contentIdentifier == nil ? @"" : mediaTrack.contentIdentifier,
+            @"trackContentType": mediaTrack.contentType == nil ? @"" : mediaTrack.contentType,
+            @"type": [MLPCastUtilities getTrackType:mediaTrack.type],
+        };
+        if(track != nil)
+        {
+            [tracks addObject:track];
+        }
+    }
     return tracks;
 }
 
