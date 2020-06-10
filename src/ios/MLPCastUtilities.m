@@ -149,7 +149,7 @@ NSDictionary* queueOrderIDsByItemId = nil;
     
     NSArray* keys = data.allKeys;
     for (NSString* key in keys) {
-        if ([key isEqualToString:@"metadataType"] || [key isEqualToString:@"images"] || [key isEqualToString:@"type"] || [key isEqualToString:@"tracks"]) {
+        if ([key isEqualToString:@"metadataType"] || [key isEqualToString:@"images"] || [key isEqualToString:@"type"]) {
             continue;
         }
         NSString* convertedKey = [MLPCastUtilities getiOSMetadataName:key];
