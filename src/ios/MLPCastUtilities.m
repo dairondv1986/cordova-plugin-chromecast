@@ -18,14 +18,13 @@ NSDictionary* queueOrderIDsByItemId = nil;
     mediaInfoBuilder.streamDuration = duration;
     if ([streamType isEqualToString:@"buffered"]) {
         mediaInfoBuilder.streamType = GCKMediaStreamTypeBuffered;
-        mediaInfoBuilder.startAbsoluteTime = 0;
     } else if ([streamType isEqualToString:@"live"]) {
-        mediaInfoBuilder.streamType = GCKMediaStreamTypeLive;
-        mediaInfoBuilder.startAbsoluteTime = startTime;
+        mediaInfoBuilder.streamType = GCKMediaStreamTypeLive;        
     } else {
         mediaInfoBuilder.streamType = GCKMediaStreamTypeNone;
-        mediaInfoBuilder.startAbsoluteTime = startTime;
     }    
+    
+    mediaInfoBuilder.startAbsoluteTime = startTime;    
     mediaInfoBuilder.metadata = [MLPCastUtilities buildMediaMetadata:metaData];
     mediaInfoBuilder.textTrackStyle = [MLPCastUtilities buildTextTrackStyle:textTrackStyle];
 
