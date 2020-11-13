@@ -24,7 +24,7 @@ NSDictionary* queueOrderIDsByItemId = nil;
         mediaInfoBuilder.startAbsoluteTime = startTime;
     } else {
         mediaInfoBuilder.streamType = GCKMediaStreamTypeNone;
-        mediaInfoBuilder.startAbsoluteTime = 0;
+        mediaInfoBuilder.startAbsoluteTime = startTime;
     }    
     mediaInfoBuilder.metadata = [MLPCastUtilities buildMediaMetadata:metaData];
     mediaInfoBuilder.textTrackStyle = [MLPCastUtilities buildTextTrackStyle:textTrackStyle];
